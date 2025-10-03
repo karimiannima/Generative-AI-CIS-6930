@@ -1,147 +1,110 @@
-🫀 Fine-Tuning Pre-Trained Models for ECG Analysis with PEFT
-📊 Dataset Overview
+# 🫀 Fine-Tuning Pre-Trained Models for ECG Analysis with PEFT
 
-Dataset Name: df_segment2.csv
+## 📊 Dataset Overview
 
-Shape: 65,425 × 601
+- **Dataset Name:** `df_segment2.csv`  
+- **Shape:** `65,425 × 601`  
+- **Description:**  
+  - Each **row** corresponds to one ECG segment.  
+  - Each segment contains **600 signal samples**, followed by a **binary label** (`0` or `1`) in the **last column**.  
+  - Segments originate from multiple users (user IDs are **not provided**).
 
-Description:
+### 📥 Download  
+The dataset can be downloaded from the following link (requires USF Learn authentication):
 
-Each row represents one ECG segment.
+👉 [USF Learn – df_segment2.csv](https://usflearn.instructure.com/courses/2047050/files?preview=199873452)
 
-Each segment contains 600 signal samples followed by a binary label (0 or 1) in the last column.
+### 🧪 Preprocessing (Required)
 
-Segments originate from multiple users (user IDs are not provided to students).
+Before training, each ECG segment must be **normalized**:
 
-📥 Download
+- ✅ **Per-segment z-score (Recommended)**  
+  For each row \( x \):  
+  \[
+  x' = \frac{x - \mu_{\text{row}}}{\sigma_{\text{row}}}
+  \]
 
-You can download the dataset from:
-👉 USF Learn – df_segment2.csv
+- 🧪 **Global z-score (For Ablation)**  
+  Compute the global mean and standard deviation across the entire dataset and normalize all samples accordingly.
 
-Note: You must be logged into your USF Learn account to access the file.
+---
 
-🧪 Preprocessing (Required)
+## 🧠 Assignment Overview
 
-Before feeding the data into models, you must normalize each segment:
+The objective of this assignment is to **fine-tune pre-trained audio and foundation models** for ECG signal analysis using **Parameter-Efficient Fine-Tuning (PEFT)** methods such as **Adapters** and **LoRA**.
 
-✅ Per-segment z-score (Recommended)
-For each row 
-𝑥
-x:
+### 🎯 Goal  
+> Fine-tune **Wav2Vec2**, **HuBERT**, and the **ECG-FM foundation model** for **binary classification** on ECG segments.
 
-𝑥
-′
-=
-𝑥
-−
-𝜇
-row
-𝜎
-row
-x
-′
-=
-σ
-row
-	​
+**Models to use:**  
+- [Wav2Vec2](https://huggingface.co/facebook/wav2vec2-base)  
+- [HuBERT](https://huggingface.co/facebook/hubert-base-ls960)  
+- [ECG-FM](https://github.com/bowang-lab/ECG-FM)
 
-x−μ
-row
-	​
+---
 
-	​
+## 📝 Tasks
 
+### 1. Model Selection & Preparation
+- Select **two pre-trained models** (Wav2Vec2 and HuBERT) and include **ECG-FM**.  
+- Understand each model’s **architecture**, **input format**, and **capabilities**.  
+- Preprocess the ECG dataset appropriately for each model.
 
-🧪 Global z-score (For Ablation)
-Compute the global mean and standard deviation over the entire dataset and normalize all samples accordingly.
-
-🧠 Assignment Overview
-
-The goal of this assignment is to fine-tune pre-trained audio and foundation models for ECG signal analysis using Parameter-Efficient Fine-Tuning (PEFT) methods such as Adapters and LoRA.
-
-🎯 Objective
-
-Fine-tune Wav2Vec2, HuBERT, and the ECG-FM foundation model for binary classification of ECG signals.
-
-📚 Models to use:
-
-Wav2Vec2
-
-HuBERT
-
-ECG-FM
-
-📝 Tasks
-1. Model Selection & Preparation
-
-Choose two pre-trained models (Wav2Vec2 and HuBERT) and include ECG-FM.
-
-Study their architectures, expected input format, and capabilities.
-
-Preprocess the ECG data to match each model's input requirements (e.g., reshape 1D signals as needed).
-
-2. Fine-Tuning with PEFT
-
+### 2. Fine-Tuning with PEFT
 Implement and compare two PEFT techniques for each model:
+- 🧩 **Adapters**  
+- 🪄 **LoRA (Low-Rank Adaptation)**
 
-🧩 Adapters
+### 3. Implementation & Training
+- Use **PyTorch** or **TensorFlow** for implementation.  
+- Fine-tune each model with adapters and LoRA.  
+- Perform hyperparameter tuning (e.g., learning rate, batch size, epochs).  
+- Log training and validation curves for analysis.
 
-🪄 LoRA (Low-Rank Adaptation)
+### 4. Evaluation & Comparison
+Evaluate and compare models using:
+- **Accuracy**  
+- **Precision**  
+- **Recall**  
+- **F1-score**
 
-3. Implementation & Training
+Analyze trade-offs between adapters and LoRA for each model.
 
-Use PyTorch (preferred) or TensorFlow.
+---
 
-Implement fine-tuning for each model with adapters and LoRA.
+## 📦 Deliverables
 
-Tune hyperparameters such as learning rate, batch size, epochs, and regularization.
+1. **Report (PDF or Markdown)**  
+   - Description of the models and their architectures  
+   - PEFT techniques implemented  
+   - ECG preprocessing pipeline  
+   - Training process and hyperparameters  
+   - Evaluation metrics and performance comparison
 
-Log training and validation curves for analysis.
+2. **Code**  
+   - Scripts or notebooks for each model × PEFT technique  
+   - Clean, well-documented code
 
-4. Evaluation & Comparison
+---
 
-Evaluate models using:
+## 🧮 Grading Criteria
 
-Accuracy
+| **Category**                          | **Points** | **Description** |
+|---------------------------------------|------------|-----------------|
+| Model Understanding & Selection       | 40 pts     | Understanding architectures, justifying model & PEFT choices |
+| Implementation & Training             | 60 pts     | Correct implementation, training, tuning |
+| Evaluation & Comparison               | 60 pts     | Proper metric computation and analysis |
+| Report Quality & Clarity              | 40 pts     | Clear, structured, insightful report |
 
-Precision
+---
 
-Recall
+## 📚 References
 
-F1-score
+- [Hugging Face Transformers](https://huggingface.co/docs/transformers/index)  
+- [LoRA: Low-Rank Adaptation of Large Language Models](https://arxiv.org/abs/2106.09685)  
+- [ECG-FM Foundation Model](https://github.com/bowang-lab/ECG-FM)  
 
-Compare adapters vs LoRA for each model and analyze trade-offs in performance, convergence, and resource usage.
+---
 
-📦 Deliverables
+## 📂 Suggested Project Structure
 
-📄 Report (PDF or Markdown)
-
-Overview of models and their architectures.
-
-Description of PEFT techniques used.
-
-ECG preprocessing pipeline.
-
-Training process and hyperparameters.
-
-Quantitative results and performance comparison.
-
-💻 Code
-
-Implementation scripts or notebooks for each model × PEFT combination.
-
-Clear documentation and comments.
-
-🧮 Grading Criteria
-Category	Points	Description
-Model Understanding & Selection	40 pts	Correct model choice, architectural understanding, PEFT justification
-Implementation & Training	60 pts	Proper implementation and training with adapters/LoRA
-Evaluation & Comparison	60 pts	Metric computation, adapters vs LoRA comparison
-Report Quality & Clarity	40 pts	Clear, organized, well-written report with insights
-📚 References
-
-Hugging Face Transformers
-
-LoRA: Low-Rank Adaptation of Large Language Models
-
-ECG-FM Foundation Model
