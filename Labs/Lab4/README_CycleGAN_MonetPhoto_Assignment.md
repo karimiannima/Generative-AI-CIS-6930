@@ -136,8 +136,3 @@ Submit a single ZIP file containing:
 - [Original CycleGAN GitHub Repository](https://github.com/junyanz/pytorch-CycleGAN-and-pix2pix)  
 - [LSGAN Paper](https://arxiv.org/abs/1611.04076)
 
----
-
-## 🧑‍🏫 Acknowledgments
-This assignment is part of the **Generative AI Course** (Week 5) focusing on **adversarial generative models**.  
-It builds upon prior assignments on **Autoencoders** and **Pix2Pix** to extend your understanding of **unpaired domain translation**.
