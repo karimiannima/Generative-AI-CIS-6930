@@ -30,7 +30,7 @@ monet2photo/
 Each image will be resized to **286×286**, then randomly cropped to **256×256**, flipped horizontally, and normalized to `[-1, 1]`.
 
 You can download the dataset from Kaggle or other CycleGAN sources:
-- [Monet2Photo Dataset on Kaggle](https://www.kaggle.com/datasets/andrewmvd/monet2photo)
+- [Monet2Photo Dataset on Kaggle](https://www.kaggle.com/datasets/balraj98/monet2photo)
 
 ---
 
